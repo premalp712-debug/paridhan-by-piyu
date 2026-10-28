@@ -1,0 +1,33 @@
+PARIDHAN BY PIYU — SELLING PRICE UPDATE
+
+Apply this after the previously supplied Paridhan-Admin-Login-Fix.
+This is a source patch for your local project, not a complete hosting build.
+
+1. Back up your current project.
+2. Merge the app/ and lib/ folders into your project and replace included files.
+   Keep your existing .dev.vars. If you edited app/page.tsx since the last ZIP
+   (for example the story image path), retain that edit when merging this file.
+3. Restart npm run dev. If using npm run start, stop the old server,
+   run npm run build, then npm run start. For hosting, redeploy the new build.
+4. Sign in at /admin. Products > Edit > Selling price (INR) > SAVE PRODUCT.
+5. Refresh the storefront to see the saved price.
+
+BUY
+Product cards, Buy details and the enquiry form show selling price.
+The server snapshots the price from the product record, ignoring client prices.
+The PDF and admin enquiry show unit price, quantity 1 and outfit total.
+Old enquiry prices stay unchanged when the product price changes.
+Payment is pending. The PDF is an enquiry, not a tax invoice or payment receipt.
+Delivery or alterations, if applicable, are confirmed separately.
+
+RENT
+Rent details, enquiry form, admin enquiry and enquiry PDF show only this note:
+Rental price will be confirmed after enquiry.
+No selling price or automatic rental amount is included in the Rent enquiry.
+
+No actual prices were supplied; none have been invented.
+Empty/zero prices show Purchase price on request, never INR 0.
+Previous enquiries without price snapshots stay price-on-request.
+
+Verification: TypeScript, production build, price validation, Buy/Rent
+separation and PDF text checks passed. Browser/live D1 integration not tested.

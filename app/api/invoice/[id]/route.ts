@@ -1,0 +1,3 @@
+import {db,identity,roles} from '../../../../lib/server';
+import {invoicePdf} from '../../../../lib/pdf';
+export async function GET(req:Request,{params}:any){const {id}=await params;const row=await db().prepare('SELECT data FROM orders WHERE id=?').bind(id).first<any>();if(!row)return new Response('Not found',{status:404});const o=JSON.parse(row.data);const token=new URL(req.url).searchParams.get('token');if(token!==o.invoiceToken){const u=await identity();if(!u||!(roles[u.role]||[]).includes('orders'))return new Response('Forbidden',{status:403});}return new Response(invoicePdf(o),{headers:{'Content-Type':'application/pdf','Content-Disposition':`attachment; filename="${id}.pdf"`,'Cache-Control':'private, no-store','Referrer-Policy':'no-referrer'}});}

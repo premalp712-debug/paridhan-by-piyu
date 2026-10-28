@@ -1,0 +1,36 @@
+PARIDHAN — DIRECT WHATSAPP ENQUIRY FIX
+Requires the previously supplied Price Update.
+
+1. Extract this ZIP to a Paridhan-WhatsApp-Fix folder INSIDE your website project.
+2. Open a terminal in the website project (the folder with package.json).
+3. Run:
+   node Paridhan-WhatsApp-Fix/apply-whatsapp-fix.mjs
+4. Restart npm run dev. For production: stop the server, run npm run build,
+   then npm run start (or deploy the fresh build).
+
+The script changes only the enquiry flow in app/page.tsx and adds
+lib/whatsapp-enquiry.ts. It backs up app/page.tsx before editing it.
+It does NOT replace your product data, prices, images, login or database.
+If your enquiry code is different it stops without making changes.
+
+When the customer submits a valid enquiry:
+- A tab is reserved during the click to reduce popup blocking.
+- The enquiry is saved; its reference and saved price come from your server.
+- WhatsApp opens for +91 9106815205 with customer/outfit/price details.
+- The customer's enquiry PDF download is attempted automatically.
+- If a tab was blocked, the current tab opens WhatsApp after the download attempt.
+- A saved-enquiry screen offers retry links if needed; it is not a required step.
+
+BUY: saved unit price, quantity and outfit total, payment pending.
+RENT: rental dates plus Rental price will be confirmed after enquiry.
+Public HTTPS photo links are included; localhost photo links are omitted.
+
+LIMITATION
+WhatsApp click-to-chat prepares a text message, not an attachment.
+Without the WhatsApp API a website cannot auto-attach a PDF to a specific chat
+or press Send. The customer must attach the downloaded PDF and tap Send.
+Device/browser settings may show a WhatsApp opening or download prompt.
+This is an enquiry summary, not a paid receipt or tax invoice.
+
+Verified: TypeScript, production build and automated URL/fallback tests.
+Real WhatsApp/device handoff has not been tested; no test messages were sent.

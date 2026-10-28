@@ -1,0 +1,2 @@
+import {authorize,sameOrigin,bucket,json,error} from '../../../lib/server';
+export async function POST(req:Request){try{sameOrigin(req);await authorize('products');const form=await req.formData();const file=form.get('file');if(!(file instanceof File)||file.size>8*1024*1024||!['image/jpeg','image/png','image/webp'].includes(file.type))throw new Error('Choose a JPG, PNG or WebP under 8 MB.');const id=crypto.randomUUID();await bucket().put(id,await file.arrayBuffer(),{httpMetadata:{contentType:file.type}});return json({url:'/api/media/'+id});}catch(e){return error(e)}}
